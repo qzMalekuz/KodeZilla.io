@@ -1,156 +1,80 @@
-# 🏆 Contest Platform
+# Contest Platform
 
-A robust full-featured backend for hosting competitive programming contests with MCQ and DSA challenges. Built with modern technologies for reliability, performance, and scalability.
+The project is now split into a backend in `BE/` and a lightweight browser frontend in `FE/`.
 
-## ✨ Features
+## Structure
 
-- **Dual Challenge Types**: Support for MCQ (Multiple Choice) and DSA (Data Structures & Algorithms) problems
-- **Secure Authentication**: JWT-based stateless authentication with role-based access control
-- **Contest Management**: Create, manage, and track contests with multiple problems
-- **Submission Tracking**: Monitor user submissions, scores, and test case results
-- **Test Case Validation**: Custom test cases with hidden/visible options for DSA problems
-- **Password Security**: Industry-standard bcrypt password hashing
+```text
+BE/
+  src/
+  prisma/
+  package.json
+  tsconfig.json
+  prisma.config.ts
 
-## 🚀 Tech Stack
+FE/
+  index.html
+  app.jsx
+  server.ts
+  styles.css
+  package.json
 
-### Runtime & Framework
-- **Bun** - High-performance JavaScript runtime with built-in support for TypeScript
-- **Express.js** - Fast, minimal web framework for Node.js
-- **TypeScript** - Type-safe JavaScript for robust development
-
-### Database & ORM
-- **PostgreSQL** - Powerful relational database
-- **Prisma v7.2** - Modern ORM with type-safe database access
-- **Prisma Adapter for PostgreSQL** - Optimized PostgreSQL connection adapter
-
-### Authentication & Security
-- **JWT (JSON Web Tokens)** - Secure stateless authentication mechanism
-- **bcrypt** - Password hashing with salt rounds for enhanced security
-- **Custom Auth Middleware** - Request-level authentication validation
-
-### Validation & Type Safety
-- **Zod** - TypeScript-first schema validation for all API inputs
-- **TypeScript Types** - Strict type definitions for Express requests/responses
-
-### Configuration
-- **Dotenv** - Secure environment variable management
-
-## 📁 Project Structure
-
-```
-src/
-├── index.ts                 # Application entry point
-├── routes/
-│   ├── auth.ts             # Authentication endpoints
-│   ├── contests.ts         # Contest management
-│   └── problems.ts         # Problem & submission handling
-├── middleware/
-│   └── authMiddleware.ts    # JWT authentication
-├── validators/
-│   └── schemas.ts          # Zod validation schemas
-├── lib/
-│   └── prisma.ts           # Prisma client setup
-└── generated/prisma/       # Auto-generated Prisma types
-
-prisma/
-├── schema.prisma           # Database schema
-└── migrations/             # Migration history
+.env
+package.json
 ```
 
-## 👥 User Roles
+## Backend
 
-- **creator** – Creates and manages contests, MCQs, and DSA problems
-- **contestee** – Participates in contests and submits solutions
-- **Default Role**: contestee (assigned if no role specified during signup)
+The API lives in `BE/` and still uses Bun, Express, Prisma, PostgreSQL, JWT, and Zod.
 
-## 🔐 Authentication
+Useful commands from the repo root:
 
-JWT-based authentication
+```bash
+bun run dev:be
+bun run typecheck:be
+bun run prisma:generate
+bun run prisma:migrate
+```
 
-Authorization: Bearer <JWT_TOKEN> required for all APIs except signup/login
+The backend loads environment variables from the repo root `.env`.
+The frontend proxy can also read `BACKEND_URL` from the same file.
 
-Invalid, missing, or malformed tokens return UNAUTHORIZED
+Example:
 
-🧠 Core Features
-
-Create contests with start/end time validation
-
-Add MCQ and DSA problems to contests
-
-MCQ submissions allowed once per user
-
-DSA allows multiple submissions (best score counted)
-
-Submissions allowed only during contest time
-
-Creators cannot submit to their own contests
-
-Hidden test cases are never exposed
-
-Leaderboard with correct ranking and tie handling
-
-📦 Response Format (Strict)
-Success
-{
-  "success": true,
-  "data": {},
-  "error": null
-}
-
-Error
-{
-  "success": false,
-  "data": null,
-  "error": "ERROR_CODE"
-}
-
-
-❗ No extra keys, nested errors, or objects are allowed.
-
-⚙️ Setup Instructions
-
-Install dependencies
-
-npm install
-
-
-Create .env
-
+```env
 DATABASE_URL=postgresql://user:password@localhost:5432/contestdb
 JWT_SECRET=your_secret_key
+SALT_ROUNDS=10
+PORT=3000
+BACKEND_URL=http://localhost:3000
+```
 
+## Frontend
 
-Run Prisma
+The frontend lives in `FE/` as a React app bundled with Bun and served by a small Bun server.
+That FE server also proxies `/api/*` calls to the backend, so the browser can talk to the API through the frontend origin.
 
-npx prisma migrate dev
-npx prisma generate
+It supports:
 
+- signup and login
+- token storage
+- listing contests
+- contest detail and leaderboard lookup
+- creator flows for contest, MCQ, and DSA creation
+- contestant flows for MCQ and DSA submission
 
-Start server
+Run it from the repo root:
 
-npm run dev
+```bash
+bun run build:fe
+bun run dev:fe
+```
 
+Then open `http://localhost:5173`.
 
-Server runs on http://localhost:3000
+## Notes
 
-🧪 Testing
-
-This backend is built to pass automated HTTP test cases with:
-
-Exact status codes
-
-Exact error strings
-
-ISO-8601 timestamps
-
-Deterministic DSA evaluation (mocked)
-
-✅ Notes
-
-DSA code execution is mocked for deterministic testing
-
-Leaderboard uses MCQ sum + best DSA scores
-
-Designed for clarity, correctness, and test compliance
-
-Happy Coding 🚀
+- The frontend now defaults to `${window.location.origin}/api`, and the FE server proxies that to `BACKEND_URL` or `http://localhost:3000`.
+- The React entry point is `FE/app.jsx` and Bun emits the browser bundle to `FE/dist/app.js`.
+- A new authenticated route, `GET /api/contests`, was added to make the frontend contest list possible.
+- CORS headers are enabled in the backend so the static frontend can call the API during development.

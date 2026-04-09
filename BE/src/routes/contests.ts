@@ -7,6 +7,53 @@ const router = Router();
 
 // QUESTION - 3
 
+router.get('/', authMiddleware, async (_req: Request, res: Response) => {
+    try {
+        const contests = await prisma.contest.findMany({
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        name: true
+                    }
+                },
+                _count: {
+                    select: {
+                        mcqQuestions: true,
+                        dsaProblems: true
+                    }
+                }
+            },
+            orderBy: {
+                start_time: 'asc'
+            }
+        });
+
+        return res.status(200).json({
+            success: true,
+            data: contests.map((contest) => ({
+                id: contest.id,
+                title: contest.title,
+                description: contest.description,
+                startTime: contest.start_time.toISOString(),
+                endTime: contest.end_time.toISOString(),
+                creatorId: contest.creator_id,
+                creatorName: contest.user.name,
+                mcqCount: contest._count.mcqQuestions,
+                dsaCount: contest._count.dsaProblems
+            })),
+            error: null
+        });
+    } catch (err) {
+        console.error('List contests error:', err);
+        return res.status(500).json({
+            success: false,
+            data: null,
+            error: "INTERNAL_SERVER_ERROR"
+        });
+    }
+});
+
 router.post('/', authMiddleware, async (req: Request, res: Response) => {
     try {
 

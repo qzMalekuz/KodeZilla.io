@@ -1,0 +1,9 @@
+{
+  "name": "contestplatform-fe",
+  "private": true,
+  "scripts": {
+    "build": "bun build ./app.jsx --outdir ./dist --target browser --sourcemap=inline",
+    "dev": "bun --watch ./server.ts",
+    "start": "bun ./server.ts"
+  }
+}
