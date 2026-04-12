@@ -12,14 +12,14 @@ export function ProblemCard({ problem }: ProblemCardProps) {
 
   return (
     <Link to={`/contest/${id}/problem/${problem.id}`}>
-      <Card className="space-y-4">
+      <Card className="space-y-4 border-neutral-900/20">
         <div className="flex items-center justify-between">
-          <h3 className="font-mono text-lg font-bold text-white">{problem.title}</h3>
+          <h3 className="font-mono text-2xl font-semibold uppercase leading-none text-neutral-950">{problem.title}</h3>
           <Badge label={problem.difficulty} variant={problem.difficulty} />
         </div>
-        <div className="flex items-center justify-between text-sm text-slate-400">
+        <div className="flex items-center justify-between text-sm text-neutral-500">
           <span>{problem.tags.join(' · ')}</span>
-          <span className="font-mono text-white">{problem.points} pts</span>
+          <span className="font-mono text-neutral-950">{problem.points} pts</span>
         </div>
       </Card>
     </Link>

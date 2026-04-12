@@ -8,15 +8,15 @@ interface LeaderboardTableProps {
 
 export function LeaderboardTable({ entries, currentUsername }: LeaderboardTableProps) {
   return (
-    <div className="overflow-x-auto rounded-2xl border border-border bg-black/35">
+    <div className="overflow-hidden border border-neutral-900 bg-white shadow-xl shadow-black/5">
       <table className="min-w-full border-collapse">
-        <thead className="bg-white/[0.03] text-left text-xs uppercase tracking-[0.15em] text-slate-400">
+        <thead className="bg-neutral-950 text-left text-xs uppercase tracking-[0.18em] text-neutral-400">
           <tr>
-            <th className="px-4 py-3">Rank</th>
-            <th className="px-4 py-3">User</th>
-            <th className="px-4 py-3">Score</th>
-            <th className="px-4 py-3">Solved</th>
-            <th className="px-4 py-3">Last Submission</th>
+            <th className="px-4 py-4">Rank</th>
+            <th className="px-4 py-4">User</th>
+            <th className="px-4 py-4">Score</th>
+            <th className="px-4 py-4">Solved</th>
+            <th className="px-4 py-4">Last Submission</th>
           </tr>
         </thead>
         <tbody>

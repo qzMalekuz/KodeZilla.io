@@ -19,7 +19,7 @@ export function ContestPage() {
   if (!contest) {
     return (
       <PageWrapper>
-        <p className="text-slate-300">Contest not found.</p>
+        <p className="text-neutral-600">Contest not found.</p>
       </PageWrapper>
     )
   }

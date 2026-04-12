@@ -114,14 +114,14 @@ export function LandingPage() {
           </div>
 
           <div className="grid gap-px bg-neutral-900 md:grid-cols-2">
-            <Card className="border-0 bg-neutral-950 p-8 text-white shadow-none">
+            <Card className="flex min-h-[390px] flex-col justify-between border-0 bg-neutral-950 p-8 text-white shadow-none">
               <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Developer</p>
-              <h3 className="mt-4 font-mono text-4xl font-semibold uppercase leading-none">Climb Ranked Boards</h3>
+              <h3 className="mt-4 font-mono text-4xl font-semibold uppercase leading-none text-white">Climb Ranked Boards</h3>
               <p className="mt-5 max-w-md text-base leading-8 text-stone-400">
                 Enter live rounds, track solved counts, and compete in a focused interface that keeps the pressure on the code.
               </p>
             </Card>
-            <Card className="border-0 bg-white p-8 shadow-none">
+            <Card className="flex min-h-[390px] flex-col justify-between border-0 bg-white p-8 shadow-none">
               <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Creator</p>
               <h3 className="mt-4 font-mono text-4xl font-semibold uppercase leading-none text-neutral-950">Ship Signature Contests</h3>
               <p className="mt-5 max-w-md text-base leading-8 text-neutral-600">

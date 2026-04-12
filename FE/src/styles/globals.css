@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -29,6 +29,12 @@ a {
   @apply text-inherit no-underline;
 }
 
+button,
+input,
+textarea {
+  font: inherit;
+}
+
 #root {
   @apply min-h-screen;
 }
@@ -41,4 +47,9 @@ a {
   background-image:
     radial-gradient(circle at top left, rgba(255, 106, 0, 0.18), transparent 28%),
     linear-gradient(180deg, rgba(17, 17, 17, 0.68), rgba(17, 17, 17, 0.78));
+}
+
+.brand-wordmark {
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }

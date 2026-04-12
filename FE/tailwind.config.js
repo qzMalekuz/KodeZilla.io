@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        brand: ['Anton', 'sans-serif'],
         mono: ['Oswald', 'sans-serif'],
         sans: ['Manrope', 'sans-serif'],
       },

@@ -4,12 +4,14 @@ interface ContestStatsProps {
 
 export function ContestStats({ stats }: ContestStatsProps) {
   return (
-    <section className="grid gap-4 rounded-2xl border border-border bg-black/40 p-6 md:grid-cols-4">
+    <section className="grid border border-neutral-900 bg-white md:grid-cols-4">
       {stats.map((stat, index) => (
-        <div key={stat.label} className="space-y-1 md:pl-4">
-          <p className="font-mono text-3xl font-bold text-white">{stat.value}</p>
-          <p className="text-xs uppercase tracking-[0.2em] text-slate-400">{stat.label}</p>
-          {index < stats.length - 1 ? <div className="hidden border-r border-border md:block" /> : null}
+        <div
+          key={stat.label}
+          className={index < stats.length - 1 ? 'border-b border-neutral-900 p-6 md:border-b-0 md:border-r' : 'p-6'}
+        >
+          <p className="font-mono text-4xl font-semibold uppercase leading-none text-neutral-950">{stat.value}</p>
+          <p className="mt-3 text-xs uppercase tracking-[0.2em] text-neutral-500">{stat.label}</p>
         </div>
       ))}
     </section>

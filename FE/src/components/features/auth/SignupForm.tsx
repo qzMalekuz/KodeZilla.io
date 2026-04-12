@@ -16,8 +16,9 @@ export function SignupForm() {
   }
 
   return (
-    <Card>
-      <h1 className="mb-5 font-mono text-2xl font-bold text-white">Create Account</h1>
+    <Card className="border-neutral-900/20 p-8">
+      <p className="mb-3 font-mono text-sm uppercase tracking-[0.18em] text-accent">Join</p>
+      <h1 className="mb-5 font-mono text-4xl font-semibold uppercase leading-none text-neutral-950">Create Account</h1>
       <form className="space-y-4" onSubmit={handleSubmit}>
         <Input label="Username" type="text" placeholder="byteblade" required />
         <Input label="Email" type="email" placeholder="you@example.com" required />
