@@ -53,3 +53,36 @@ textarea {
   letter-spacing: 0.02em;
   text-transform: uppercase;
 }
+
+.typing-brand {
+  width: 0;
+  overflow: hidden;
+  border-right: 2px solid var(--accent);
+  animation:
+    brandType 2.2s steps(13, end) 0.15s forwards,
+    caretBlink 0.85s step-end 6;
+}
+
+@keyframes brandType {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 10.5ch;
+  }
+}
+
+@keyframes caretBlink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-brand {
+    width: auto;
+    border-right: 0;
+    animation: none;
+  }
+}

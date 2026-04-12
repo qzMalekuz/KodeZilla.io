@@ -8,8 +8,8 @@ interface LeaderboardTableProps {
 
 export function LeaderboardTable({ entries, currentUsername }: LeaderboardTableProps) {
   return (
-    <div className="overflow-hidden border border-neutral-900 bg-white shadow-xl shadow-black/5">
-      <table className="min-w-full border-collapse">
+    <div className="overflow-x-auto border border-neutral-900 bg-white shadow-xl shadow-black/5">
+      <table className="min-w-[760px] w-full border-collapse">
         <thead className="bg-neutral-950 text-left text-xs uppercase tracking-[0.18em] text-neutral-400">
           <tr>
             <th className="px-4 py-4">Rank</th>

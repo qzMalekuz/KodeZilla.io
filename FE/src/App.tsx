@@ -24,7 +24,7 @@ export function App() {
         path="/login"
         element={
           <PageWrapper>
-            <div className="mx-auto max-w-md py-20">
+            <div className="mx-auto w-full max-w-[624px] py-16 md:py-24">
               <LoginForm />
             </div>
           </PageWrapper>
@@ -34,7 +34,7 @@ export function App() {
         path="/signup"
         element={
           <PageWrapper>
-            <div className="mx-auto max-w-md py-20">
+            <div className="mx-auto w-full max-w-[624px] py-16 md:py-24">
               <SignupForm />
             </div>
           </PageWrapper>
