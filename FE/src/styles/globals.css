@@ -58,7 +58,8 @@ textarea {
   position: relative;
   display: inline-flex;
   align-items: flex-end;
-  width: 10.6ch;
+  /* wide enough to never clip any part of "KODEZILLA.IO" */
+  width: 13ch;
   overflow: hidden;
   white-space: nowrap;
   line-height: 1;
@@ -100,7 +101,7 @@ textarea {
   }
 
   to {
-    transform: translateX(10.42ch);
+    transform: translateX(12.8ch);
   }
 }
 

@@ -1,4 +1,6 @@
-# Contest Platform
+# KodeZilla.io - Contest Platform
+
+![KodeZilla Banner](kodezilla-banner.png)
 
 The project is now split into a backend in `BE/` and a lightweight browser frontend in `FE/`.
 
