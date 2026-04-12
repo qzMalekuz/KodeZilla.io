@@ -23,54 +23,57 @@ export function Footer() {
 
   if (location.pathname === '/') {
     return (
-      <footer className="relative overflow-hidden border-t border-white/10 bg-black text-white">
-        <div className="relative z-10 mx-auto grid w-full max-w-[1280px] gap-12 px-4 pb-24 pt-16 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] md:px-0">
-          <div className="space-y-8">
-            <a href="/" className="inline-flex items-center gap-3" aria-label="KodeZilla.io home">
-              <BrandWordmark className="text-[2.2rem]" tone="light" />
-            </a>
+      <footer className="relative border-t border-white/10 bg-black text-white">
+        <div className="mx-auto w-full max-w-[1280px] px-4 pb-16 pt-12 md:px-0">
+          {/* Top border spanning full width */}
+          <div className="mb-8 border-t border-white/10" />
 
-            <p className="max-w-xl text-lg leading-relaxed text-neutral-400">
-              Open-source competitive programming infrastructure built for developers, hosts, and ranked contest communities.
-            </p>
+          <div className="grid gap-16 md:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)]">
+            {/* Left: brand + description + socials */}
+            <div className="space-y-6">
+              <a href="/" className="inline-flex items-center gap-3" aria-label="KodeZilla.io home">
+                <BrandWordmark className="text-[2.2rem]" tone="light" />
+              </a>
 
-            <div className="flex items-center gap-3">
-              {socialLinks.map(({ label, href, icon: Icon }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={label}
-                  className="footer-social inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-black/40 text-neutral-300 transition duration-200 hover:border-white/20 hover:text-white"
-                >
-                  <Icon className="h-5 w-5" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex flex-col justify-end md:pt-12">
-            <div className="border-t border-white/10 pt-8">
-              <p className="text-xs uppercase tracking-[0.18em] text-neutral-500">Credits</p>
-              <p className="mt-3 max-w-3xl text-[clamp(1.15rem,2.4vw,1.7rem)] font-medium leading-tight tracking-tight text-neutral-400">
-                Built and designed by{' '}
-                <a
-                  href="https://zafarr.xyz/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="font-semibold text-white underline decoration-white/20 underline-offset-4 transition-opacity hover:opacity-80"
-                >
-                  zafarr.
-                </a>
+              <p className="max-w-xl text-lg leading-relaxed text-neutral-400">
+                Open-source competitive programming infrastructure built for developers, hosts, and ranked contest communities.
               </p>
-              <p className="mt-4 text-sm tracking-wide text-neutral-500">© 2026 KodeZilla.io All Rights Reserved</p>
+
+              <div className="flex items-center gap-3">
+                {socialLinks.map(({ label, href, icon: Icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={label}
+                    className="footer-social inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-black/40 text-neutral-300 transition duration-200 hover:border-white/20 hover:text-white"
+                  >
+                    <Icon className="h-5 w-5" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Right: credits — top-aligned, right-aligned text */}
+            <div className="flex flex-col items-end">
+              <div className="w-full max-w-[520px] text-right">
+                <p className="text-xs uppercase tracking-[0.18em] text-neutral-500">Credits</p>
+                <p className="mt-4 text-[clamp(1.35rem,2.2vw,1.95rem)] font-medium leading-[1.08] tracking-tight text-neutral-400">
+                  Built and designed by{' '}
+                  <a
+                    href="https://zafarr.xyz/"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-semibold text-white underline decoration-white/20 underline-offset-4 transition-opacity hover:opacity-80"
+                  >
+                    zafarr.
+                  </a>
+                </p>
+                <p className="mt-4 text-sm tracking-wide text-neutral-500">© 2026 KodeZilla.io All Rights Reserved</p>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="footer-watermark pointer-events-none absolute bottom-0 left-4 z-0 select-none font-brand text-[clamp(5rem,16vw,13rem)] uppercase leading-none text-white/[0.06] md:left-0">
-          KodeZilla.io
         </div>
       </footer>
     )
