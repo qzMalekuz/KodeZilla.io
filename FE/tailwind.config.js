@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        mono: ['"Space Mono"', 'monospace'],
-        sans: ['Inter', 'sans-serif'],
+        mono: ['Oswald', 'sans-serif'],
+        sans: ['Manrope', 'sans-serif'],
       },
       colors: {
-        accent: '#4ade80',
-        surface: '#0d1117',
-        border: 'rgba(255,255,255,0.08)',
+        accent: '#ff6a00',
+        surface: '#111111',
+        border: 'rgba(255,255,255,0.12)',
       },
       animation: {
         'fade-up': 'fadeUp 0.6s ease forwards',

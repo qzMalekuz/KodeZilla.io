@@ -1,25 +1,25 @@
-import type { ButtonHTMLAttributes, PropsWithChildren } from 'react'
-import { motion } from 'framer-motion'
+import type { PropsWithChildren } from 'react'
+import { motion, type HTMLMotionProps } from 'framer-motion'
 import { cn } from '../../lib/utils'
 
 type Variant = 'ghost' | 'solid' | 'outline'
 type Size = 'sm' | 'md' | 'lg'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, PropsWithChildren {
+interface ButtonProps extends PropsWithChildren, Omit<HTMLMotionProps<'button'>, 'children'> {
   variant?: Variant
   size?: Size
 }
 
 const variantClasses: Record<Variant, string> = {
-  ghost: 'border border-white bg-transparent text-white hover:bg-white/5',
-  solid: 'border border-white bg-white text-black hover:bg-slate-100',
-  outline: 'border border-border bg-transparent text-slate-100 hover:border-white/30',
+  ghost: 'border border-accent bg-transparent text-accent hover:bg-accent hover:text-white',
+  solid: 'border border-accent bg-accent text-white hover:bg-orange-500',
+  outline: 'border border-neutral-900/15 bg-white text-neutral-900 hover:border-neutral-900 hover:bg-neutral-50',
 }
 
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-3 py-1.5 text-xs',
-  md: 'px-4 py-2 text-sm',
-  lg: 'px-6 py-3 text-base',
+  sm: 'px-3 py-2 text-xs',
+  md: 'px-5 py-2.5 text-sm',
+  lg: 'px-7 py-3.5 text-base',
 }
 
 export function Button({ variant = 'ghost', size = 'md', className, children, ...props }: ButtonProps) {
@@ -28,7 +28,7 @@ export function Button({ variant = 'ghost', size = 'md', className, children, ..
       whileHover={{ scale: 1.01 }}
       whileTap={{ scale: 0.97 }}
       className={cn(
-        'rounded-full font-mono uppercase tracking-wide transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
+        'font-mono uppercase tracking-[0.14em] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent',
         variantClasses[variant],
         sizeClasses[size],
         className,

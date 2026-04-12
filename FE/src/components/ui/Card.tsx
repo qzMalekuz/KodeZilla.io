@@ -9,8 +9,8 @@ interface CardProps extends PropsWithChildren {
 export function Card({ className, children }: CardProps) {
   return (
     <motion.article
-      whileHover={{ scale: 1.01, borderColor: 'rgba(255,255,255,0.2)' }}
-      className={cn('rounded-2xl border border-border bg-black/30 p-6 transition', className)}
+      whileHover={{ scale: 1.01, borderColor: 'rgba(17,17,17,0.55)' }}
+      className={cn('border border-neutral-900/15 bg-white p-6 shadow-xl shadow-black/5 transition', className)}
     >
       {children}
     </motion.article>

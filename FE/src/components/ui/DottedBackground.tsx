@@ -8,11 +8,11 @@ interface DottedBackgroundProps extends PropsWithChildren {
 export function DottedBackground({ children, className }: DottedBackgroundProps) {
   return (
     <div
-      className={cn('min-h-screen bg-slate-950', className)}
+      className={cn('min-h-screen bg-stone-100', className)}
       style={{
         backgroundImage:
-          'radial-gradient(circle at 70% 40%, rgba(99, 179, 237, 0.07) 0%, transparent 60%), radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px)',
-        backgroundSize: 'cover, 24px 24px',
+          'radial-gradient(circle at 78% 18%, rgba(255, 106, 0, 0.08) 0%, transparent 24%), linear-gradient(rgba(17, 17, 17, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 17, 17, 0.12) 1px, transparent 1px)',
+        backgroundSize: 'cover, 312px 312px, 312px 312px',
       }}
     >
       {children}
