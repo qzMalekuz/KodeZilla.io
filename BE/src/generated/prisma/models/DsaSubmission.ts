@@ -246,7 +246,7 @@ export type DsaSubmissionGroupByOutputType = {
   _max: DsaSubmissionMaxAggregateOutputType | null
 }
 
-type GetDsaSubmissionGroupByPayload<T extends DsaSubmissionGroupByArgs> = Prisma.PrismaPromise<
+export type GetDsaSubmissionGroupByPayload<T extends DsaSubmissionGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<DsaSubmissionGroupByOutputType, T['by']> &
       {
@@ -1556,6 +1556,11 @@ export type DsaSubmissionFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` DsaSubmissions.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of DsaSubmissions.
+   */
   distinct?: Prisma.DsaSubmissionScalarFieldEnum | Prisma.DsaSubmissionScalarFieldEnum[]
 }
 

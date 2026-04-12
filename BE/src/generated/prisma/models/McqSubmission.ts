@@ -210,7 +210,7 @@ export type McqSubmissionGroupByOutputType = {
   _max: McqSubmissionMaxAggregateOutputType | null
 }
 
-type GetMcqSubmissionGroupByPayload<T extends McqSubmissionGroupByArgs> = Prisma.PrismaPromise<
+export type GetMcqSubmissionGroupByPayload<T extends McqSubmissionGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<McqSubmissionGroupByOutputType, T['by']> &
       {
@@ -1380,6 +1380,11 @@ export type McqSubmissionFindManyArgs<ExtArgs extends runtime.Types.Extensions.I
    * Skip the first `n` McqSubmissions.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of McqSubmissions.
+   */
   distinct?: Prisma.McqSubmissionScalarFieldEnum | Prisma.McqSubmissionScalarFieldEnum[]
 }
 

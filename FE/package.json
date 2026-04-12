@@ -2,8 +2,9 @@
   "name": "contestplatform-fe",
   "private": true,
   "scripts": {
-    "build": "bun build ./app.jsx --outdir ./dist --target browser --sourcemap=inline",
+    "build": "bun build ./src/main.tsx --outdir ./dist --target browser --sourcemap=inline",
     "dev": "bun --watch ./server.ts",
-    "start": "bun ./server.ts"
+    "start": "bun ./server.ts",
+    "typecheck": "tsc --noEmit -p ./tsconfig.json"
   }
 }

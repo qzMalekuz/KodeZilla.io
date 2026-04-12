@@ -23,7 +23,7 @@ const CreateMCQSchema = z.object({
   questionText: z.string(),
   options: z.array(z.string()).min(1),
   correctOptionIndex: z.number().int().min(0),
-  points: z.number(),
+  points: z.number().optional(),
 }).refine((data) => data.correctOptionIndex < data.options.length, {
   message: "correctOptionIndex must be within options array bounds",
 });
@@ -41,10 +41,10 @@ const TestCaseSchema = z.object({
 const CreateDSAProblemSchema = z.object({
   title: z.string(),
   description: z.string(),
-  tags: z.array(z.string()),
-  points: z.number(),
-  timeLimit: z.number(),
-  memoryLimit: z.number(),
+  tags: z.array(z.string()).optional(),
+  points: z.number().optional(),
+  timeLimit: z.number().optional(),
+  memoryLimit: z.number().optional(),
   testCases: z.array(TestCaseSchema).min(1),
 });
 

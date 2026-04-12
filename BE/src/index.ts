@@ -1,11 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
-dotenv.config({ path: new URL('../../.env', import.meta.url).pathname });
+dotenv.config({ path: new URL('../.env', import.meta.url).pathname });
 import authRoutes from './routes/auth';
 import contestRoutes from './routes/contests';
 import problemRoutes from './routes/problems';
 
-const app = express();
+export const app = express();
 const port = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
@@ -36,6 +36,8 @@ app.use('/api/contests', contestRoutes);
 app.use('/api/problems', problemRoutes);
 
 
-app.listen(port, () => {
-    console.log(`Listening to Aujla on port ${port}`);
-});
+if (import.meta.main) {
+    app.listen(port, () => {
+        console.log(`Listening to Aujla on port ${port}`);
+    });
+}

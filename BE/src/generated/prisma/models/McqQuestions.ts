@@ -206,7 +206,7 @@ export type McqQuestionsGroupByOutputType = {
   _max: McqQuestionsMaxAggregateOutputType | null
 }
 
-type GetMcqQuestionsGroupByPayload<T extends McqQuestionsGroupByArgs> = Prisma.PrismaPromise<
+export type GetMcqQuestionsGroupByPayload<T extends McqQuestionsGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<McqQuestionsGroupByOutputType, T['by']> &
       {
@@ -1365,6 +1365,11 @@ export type McqQuestionsFindManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Skip the first `n` McqQuestions.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of McqQuestions.
+   */
   distinct?: Prisma.McqQuestionsScalarFieldEnum | Prisma.McqQuestionsScalarFieldEnum[]
 }
 

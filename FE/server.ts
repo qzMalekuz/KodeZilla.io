@@ -1,9 +1,11 @@
+export {};
+
 const port = Number(process.env.FE_PORT) || 5173;
 const backendUrl = (process.env.BACKEND_URL || "http://localhost:3000").replace(/\/$/, "");
 
 async function buildFrontend() {
   const result = await Bun.build({
-    entrypoints: ["./app.jsx"],
+    entrypoints: ["./src/main.tsx"],
     outdir: "./dist",
     target: "browser",
     sourcemap: "inline",
@@ -31,12 +33,12 @@ async function proxyToBackend(req: Request) {
     headers,
     body: req.method === "GET" || req.method === "HEAD" ? undefined : req.body,
     duplex: "half",
-  });
+  } as RequestInit & { duplex: "half" });
 }
 
 Bun.serve({
   port,
-  async fetch(req) {
+  async fetch(req: Request) {
     const { pathname } = new URL(req.url);
 
     if (pathname.startsWith("/api/")) {
@@ -51,8 +53,8 @@ Bun.serve({
       return serveFile("./styles.css");
     }
 
-    if (pathname === "/dist/app.js") {
-      return serveFile("./dist/app.js");
+    if (pathname === "/dist/main.js") {
+      return serveFile("./dist/main.js");
     }
 
     return serveFile("./index.html");
