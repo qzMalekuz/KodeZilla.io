@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { PageWrapper } from '../components/layout/PageWrapper'
 import { Button } from '../components/ui/Button'
-import { Card } from '../components/ui/Card'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -104,31 +103,62 @@ export function LandingPage() {
           ))}
         </section>
 
-        <section className="grid lg:grid-cols-[0.34fr_0.66fr]">
-          <div className="border-b border-neutral-900 bg-stone-50 p-8 md:p-10 lg:border-b-0 lg:border-r">
-            <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Evidence Log</p>
-            <h2 className="mt-4 font-mono text-5xl font-semibold uppercase leading-none text-neutral-950">Our Arena</h2>
-            <p className="mt-6 max-w-sm text-base leading-8 text-neutral-600">
-              Explore a contest platform that treats participation and creation like flagship product experiences, not utility screens.
-            </p>
-          </div>
+        <section className="grid bg-neutral-900 lg:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="editorial-card border-b border-neutral-900 bg-stone-50 p-8 md:p-10 lg:min-h-[408px] lg:border-b-0 lg:border-r"
+          >
+            <div className="flex h-full flex-col justify-between gap-12">
+              <div>
+                <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Evidence Log</p>
+                <h2 className="mt-5 font-mono text-5xl font-semibold uppercase leading-none text-neutral-950 md:text-6xl">Our Arena</h2>
+              </div>
+              <p className="max-w-sm text-base leading-8 text-neutral-600">
+                Explore a contest platform that treats participation and creation like flagship product experiences, not utility screens.
+              </p>
+            </div>
+          </motion.div>
 
-          <div className="grid gap-px bg-neutral-900 md:grid-cols-2">
-            <Card className="flex min-h-[390px] flex-col justify-between border-0 bg-neutral-950 p-8 text-white shadow-none">
-              <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Developer</p>
-              <h3 className="mt-4 font-mono text-4xl font-semibold uppercase leading-none text-white">Climb Ranked Boards</h3>
-              <p className="mt-5 max-w-md text-base leading-8 text-stone-400">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.08 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="editorial-card border-b border-neutral-900 bg-neutral-950 p-8 md:p-10 lg:min-h-[408px] lg:border-b-0 lg:border-r"
+          >
+            <div className="flex h-full flex-col justify-between gap-12">
+              <div>
+                <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Developer</p>
+                <h3 className="mt-5 font-mono text-4xl font-semibold uppercase leading-none text-white md:text-5xl">Climb Ranked Boards</h3>
+              </div>
+              <p className="max-w-md text-base leading-8 text-stone-400">
                 Enter live rounds, track solved counts, and compete in a focused interface that keeps the pressure on the code.
               </p>
-            </Card>
-            <Card className="flex min-h-[390px] flex-col justify-between border-0 bg-white p-8 shadow-none">
-              <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Creator</p>
-              <h3 className="mt-4 font-mono text-4xl font-semibold uppercase leading-none text-neutral-950">Ship Signature Contests</h3>
-              <p className="mt-5 max-w-md text-base leading-8 text-neutral-600">
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.16 }}
+            viewport={{ once: true, amount: 0.2 }}
+            className="editorial-card bg-stone-50 p-8 md:p-10 lg:min-h-[408px]"
+          >
+            <div className="flex h-full flex-col justify-between gap-12">
+              <div>
+                <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Creator</p>
+                <h3 className="mt-5 font-mono text-4xl font-semibold uppercase leading-none text-neutral-950 md:text-5xl">
+                  Ship Signature Contests
+                </h3>
+              </div>
+              <p className="max-w-md text-base leading-8 text-neutral-600">
                 Build rounds with strong pacing, publication controls, and a visual identity that feels premium from the first click.
               </p>
-            </Card>
-          </div>
+            </div>
+          </motion.div>
         </section>
       </section>
     </PageWrapper>

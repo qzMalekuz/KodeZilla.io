@@ -7,7 +7,7 @@ export function PageWrapper({ children }: PropsWithChildren) {
   return (
     <DottedBackground>
       <Navbar />
-      <main className="mx-auto w-full max-w-[1400px] px-4 py-8 md:px-6 md:py-10">{children}</main>
+      <main className="mx-auto w-full max-w-[1280px] px-4 py-8 md:px-0 md:py-10">{children}</main>
       <Footer />
     </DottedBackground>
   )

@@ -8,7 +8,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-900 bg-stone-50/95 backdrop-blur-sm">
-      <nav className="mx-auto flex w-full max-w-[1400px] items-center justify-between px-4 py-4 md:px-6">
+      <nav className="mx-auto flex w-full max-w-[1280px] items-center justify-between px-4 py-4 md:px-0">
         <Link to="/" className="leading-none text-neutral-950">
           <BrandWordmark className="text-[2.55rem]" animate={location.pathname === '/'} />
         </Link>

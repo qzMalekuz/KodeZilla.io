@@ -15,7 +15,7 @@ export function HostContestPage() {
 
   return (
     <PageWrapper>
-      <section className="mx-auto max-w-3xl space-y-6">
+      <section className="mx-auto max-w-[960px] space-y-6">
         <div className="space-y-3 border-b border-neutral-900 pb-6">
           <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Creator Console</p>
           <h1 className="font-mono text-5xl font-semibold uppercase leading-none text-neutral-950 md:text-6xl">Host Contest</h1>
@@ -23,7 +23,7 @@ export function HostContestPage() {
             Launch a polished contest with clear timings, sharp descriptions, and creator-first controls.
           </p>
         </div>
-        <Card className="border-neutral-900/20 p-8">
+        <Card className="editorial-card border-neutral-900/20 p-8 md:p-10">
           <form className="space-y-4" onSubmit={handleSubmit}>
             <Input label="Title" placeholder="Weekly Array Arena" required />
             <Input label="Start Time" type="datetime-local" required />

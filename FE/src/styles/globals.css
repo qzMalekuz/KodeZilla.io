@@ -54,35 +54,131 @@ textarea {
   text-transform: uppercase;
 }
 
-.typing-brand {
-  width: 0;
+.typing-brand-shell {
+  position: relative;
+  display: inline-flex;
+  align-items: flex-end;
+  width: 10.6ch;
   overflow: hidden;
-  border-right: 2px solid var(--accent);
-  animation:
-    brandType 2.2s steps(13, end) 0.15s forwards,
-    caretBlink 0.85s step-end 6;
+  white-space: nowrap;
+  line-height: 1;
 }
 
-@keyframes brandType {
+.typing-brand-track {
+  display: inline-flex;
+  align-items: flex-end;
+  white-space: nowrap;
+  clip-path: inset(0 100% 0 0);
+  animation: brandReveal 2.05s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+}
+
+.typing-brand-caret {
+  position: absolute;
+  top: 0.08em;
+  bottom: 0.08em;
+  width: 0.08em;
+  background: var(--accent);
+  transform: translateX(0);
+  animation:
+    brandCaretMove 2.05s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards,
+    caretBlink 0.9s ease-in-out 0.1s 5;
+}
+
+@keyframes brandReveal {
   from {
-    width: 0;
+    clip-path: inset(0 100% 0 0);
   }
 
   to {
-    width: 10.5ch;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes brandCaretMove {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(10.42ch);
   }
 }
 
 @keyframes caretBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
   50% {
-    border-color: transparent;
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .typing-brand {
+  .typing-brand-shell {
     width: auto;
-    border-right: 0;
+    overflow: visible;
+  }
+
+  .typing-brand-track {
+    clip-path: inset(0 0 0 0);
     animation: none;
   }
+
+  .typing-brand-caret {
+    display: none;
+  }
+}
+
+/*
+  Footer motion is intentionally subtle so the oversized background mark
+  stays atmospheric instead of competing with foreground content.
+*/
+.footer-social {
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-social::before {
+  content: '';
+  position: absolute;
+  inset: auto 14px -14px;
+  height: 18px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.footer-social:hover::before {
+  opacity: 1;
+}
+
+.footer-social:hover {
+  transform: translateY(-1px);
+}
+
+.footer-watermark {
+  transform: translateY(42%);
+}
+
+.editorial-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.editorial-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(255, 106, 0, 0.12), transparent 34%);
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+}
+
+.editorial-card:hover::before {
+  opacity: 1;
 }
