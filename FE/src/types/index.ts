@@ -7,6 +7,7 @@ export interface Contest {
   participantCount: number
   problems: Problem[]
   isPublic: boolean
+  tags?: string[]
 }
 
 export interface Problem {

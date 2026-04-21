@@ -4,7 +4,6 @@ import { BrandWordmark } from '../ui/BrandWordmark'
 import { Button } from '../ui/Button'
 
 const navLinks = [
-  { to: '/', label: 'Home' },
   { to: '/explore', label: 'Explore' },
   { to: '/leaderboard', label: 'Rankings' },
   { to: '/host', label: 'Host' },
@@ -12,13 +11,18 @@ const navLinks = [
 
 export function Navbar() {
   const location = useLocation()
-  const { isAuthenticated, logout } = useAuth()
+  const { isAuthenticated, logout, user } = useAuth()
   const navigate = useNavigate()
 
   function handleLogout() {
     logout()
     navigate('/')
   }
+
+  // Initials avatar from user name
+  const initials = user?.name
+    ? user.name.split(' ').map((w) => w[0]).join('').toUpperCase().slice(0, 2)
+    : '?'
 
   return (
     <header className="sticky top-0 z-40 border-b border-neutral-900 bg-stone-50/95 backdrop-blur-sm">
@@ -42,19 +46,28 @@ export function Navbar() {
             ))}
           </div>
         ) : (
-          /* Placeholder to keep the grid centred */
           <div />
         )}
 
         {/* Right: auth actions */}
-        <div className="flex items-center justify-end gap-3">
+        <div className="flex items-center justify-end gap-4">
           {isAuthenticated ? (
-            <button
-              onClick={handleLogout}
-              className="text-sm font-semibold text-neutral-700 transition hover:text-neutral-950"
-            >
-              Log out
-            </button>
+            <>
+              {/* Profile avatar — links to the user's profile page */}
+              <Link
+                to={`/profile/${user?.name ?? 'me'}`}
+                title="View profile"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-900 text-xs font-bold text-white transition hover:bg-accent"
+              >
+                {initials}
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="text-sm font-semibold text-neutral-700 transition hover:text-neutral-950"
+              >
+                Log out
+              </button>
+            </>
           ) : (
             <>
               <Link to="/login" className="text-sm font-semibold text-neutral-700 transition hover:text-neutral-950">

@@ -7,7 +7,13 @@
       "Bash(curl -s \"https://fonts.gstatic.com/s/oswald/v53/TK3_WkUHHAIjg75cFRf3bXL8LICs169vgUFoZAaRliE.woff2\" -o \"/Users/qzmalekuz/Documents/root/typescript & prisma/ContestPlatform/FE/public/fonts/Oswald-600.woff2\")",
       "Bash(curl -s \"https://fonts.gstatic.com/s/oswald/v53/TK3_WkUHHAIjg75cFRf3bXL8LICs14ZvgUFoZAaRliE.woff2\" -o \"/Users/qzmalekuz/Documents/root/typescript & prisma/ContestPlatform/FE/public/fonts/Oswald-700.woff2\")",
       "Bash(bun add:*)",
-      "Bash(rtk read:*)"
+      "Bash(rtk read:*)",
+      "Bash(rtk curl:*)",
+      "Bash(lsof -iTCP -sTCP:LISTEN -n -P)",
+      "Bash(rtk find:*)",
+      "Bash(bun run:*)",
+      "Bash(curl -s http://localhost:4000/api/health)",
+      "Bash(bun prisma/seed.ts)"
     ]
   }
 }
