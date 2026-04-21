@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import { LoginForm } from './components/features/auth/LoginForm'
 import { SignupForm } from './components/features/auth/SignupForm'
 import { PageWrapper } from './components/layout/PageWrapper'
+import { ProtectedRoute } from './components/layout/ProtectedRoute'
 import { ContestPage } from './pages/ContestPage'
 import { ExplorePage } from './pages/ExplorePage'
 import { HostContestPage } from './pages/HostContestPage'
@@ -14,12 +15,15 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/explore" element={<ExplorePage />} />
-      <Route path="/leaderboard" element={<LeaderboardPage />} />
-      <Route path="/contest/:id" element={<ContestPage />} />
-      <Route path="/contest/:id/problem/:pid" element={<ProblemPage />} />
-      <Route path="/host" element={<HostContestPage />} />
-      <Route path="/profile/:username" element={<ProfilePage />} />
+
+      {/* Protected: require authentication */}
+      <Route path="/explore" element={<ProtectedRoute><ExplorePage /></ProtectedRoute>} />
+      <Route path="/leaderboard" element={<ProtectedRoute><LeaderboardPage /></ProtectedRoute>} />
+      <Route path="/contest/:id" element={<ProtectedRoute><ContestPage /></ProtectedRoute>} />
+      <Route path="/contest/:id/problem/:pid" element={<ProtectedRoute><ProblemPage /></ProtectedRoute>} />
+      <Route path="/host" element={<ProtectedRoute><HostContestPage /></ProtectedRoute>} />
+      <Route path="/profile/:username" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+
       <Route
         path="/login"
         element={

@@ -1,7 +1,7 @@
 import type { Contest, LeaderboardEntry, Problem, User } from '../types'
 
 const users: User[] = [
-  { id: 'u1', username: 'byteblade', email: 'byte@arena.dev', rating: 1842, rank: 33 },
+  { id: 'u1', username: 'qzmalekuz', email: 'qzmalekuz@kodezilla.io', rating: 1842, rank: 33 },
   { id: 'u2', username: 'loopqueen', email: 'loop@arena.dev', rating: 1765, rank: 61 },
   { id: 'u3', username: 'stackstorm', email: 'stack@arena.dev', rating: 1912, rank: 18 },
 ]

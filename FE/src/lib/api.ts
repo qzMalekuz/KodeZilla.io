@@ -23,9 +23,11 @@ export async function api<T>(path: string, options: RequestOptions = {}): Promis
     },
   })
 
+  const json = await response.json()
+
   if (!response.ok) {
-    throw new Error(`Request failed with status ${response.status}`)
+    throw new Error(json?.error ?? `Request failed with status ${response.status}`)
   }
 
-  return (await response.json()) as T
+  return json as T
 }

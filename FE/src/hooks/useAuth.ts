@@ -14,3 +14,5 @@ export function useAuth() {
     logout,
   }
 }
+
+export type { AuthUser } from '../store/authStore'
