@@ -64,14 +64,22 @@ export function Navbar() {
               {/* Profile avatar — links to the user's profile page */}
               <Link
                 to={`/profile/${user?.name ?? 'me'}`}
-                title="View profile"
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-900 text-xs font-bold text-white transition hover:bg-accent"
+                title={`@${user?.name ?? 'profile'}`}
+                className="group flex items-center gap-2.5 transition"
               >
-                {initials}
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-neutral-900 font-mono text-xs font-bold text-white ring-2 ring-transparent ring-offset-1 transition-all duration-200 group-hover:bg-accent group-hover:ring-accent/40">
+                  {initials}
+                </span>
+                <span className="hidden font-mono text-xs uppercase tracking-[0.12em] text-neutral-600 transition-colors duration-200 group-hover:text-neutral-950 md:block">
+                  {user?.name}
+                </span>
               </Link>
+
+              <span className="text-neutral-300">|</span>
+
               <button
                 onClick={handleLogout}
-                className="text-sm font-semibold text-neutral-700 transition hover:text-neutral-950"
+                className="font-mono text-xs uppercase tracking-[0.12em] text-neutral-500 transition hover:text-neutral-950"
               >
                 Log out
               </button>
