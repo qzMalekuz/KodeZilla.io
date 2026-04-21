@@ -35,15 +35,23 @@ export function Navbar() {
         {/* Centre: nav links — only shown when authenticated */}
         {isAuthenticated ? (
           <div className="hidden items-center gap-10 border-x border-neutral-900 px-10 py-2 md:flex">
-            {navLinks.map(({ to, label }) => (
-              <Link
-                key={to}
-                to={to}
-                className="font-mono text-sm uppercase tracking-[0.12em] text-neutral-900 transition hover:text-accent"
-              >
-                {label}
-              </Link>
-            ))}
+            {navLinks.map(({ to, label }) => {
+              const isActive = location.pathname === to || location.pathname.startsWith(to + '/')
+              return (
+                <Link
+                  key={to}
+                  to={to}
+                  className={[
+                    'relative font-mono text-sm uppercase tracking-[0.12em] transition',
+                    isActive
+                      ? 'text-accent after:absolute after:inset-x-0 after:-bottom-[18px] after:h-[2px] after:bg-accent after:content-[\'\']'
+                      : 'text-neutral-900 hover:text-accent',
+                  ].join(' ')}
+                >
+                  {label}
+                </Link>
+              )
+            })}
           </div>
         ) : (
           <div />
