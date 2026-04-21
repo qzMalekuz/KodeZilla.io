@@ -1,9 +1,16 @@
 import type { Contest, LeaderboardEntry, Problem, User } from '../types'
 
 const users: User[] = [
-  { id: 'u1', username: 'qzmalekuz', email: 'qzmalekuz@kodezilla.io', rating: 1842, rank: 33 },
-  { id: 'u2', username: 'loopqueen', email: 'loop@arena.dev', rating: 1765, rank: 61 },
-  { id: 'u3', username: 'stackstorm', email: 'stack@arena.dev', rating: 1912, rank: 18 },
+  { id: 'u1', username: 'qzmalekuz',   email: 'qzmalekuz@kodezilla.io', rating: 1842, rank: 2  },
+  { id: 'u2', username: 'loopqueen',   email: 'loop@arena.dev',         rating: 1765, rank: 5  },
+  { id: 'u3', username: 'stackstorm',  email: 'stack@arena.dev',        rating: 1912, rank: 1  },
+  { id: 'u4', username: 'byteracer',   email: 'byte@arena.dev',         rating: 1780, rank: 4  },
+  { id: 'u5', username: 'nullpointer', email: 'null@arena.dev',         rating: 1698, rank: 6  },
+  { id: 'u6', username: 'recursor',    email: 'rec@arena.dev',          rating: 1655, rank: 7  },
+  { id: 'u7', username: 'heapify',     email: 'heap@arena.dev',         rating: 1820, rank: 3  },
+  { id: 'u8', username: 'sigmagrind',  email: 'sigma@arena.dev',        rating: 1610, rank: 8  },
+  { id: 'u9', username: 'bitshift',    email: 'bit@arena.dev',          rating: 1580, rank: 9  },
+  { id: 'u10', username: 'memoize',    email: 'memo@arena.dev',         rating: 1540, rank: 10 },
 ]
 
 const problemPool: Problem[] = [
@@ -118,9 +125,16 @@ export const contests: Contest[] = [
 export const problems: Problem[] = problemPool
 
 export const leaderboard: LeaderboardEntry[] = [
-  { rank: 1, user: users[2], score: 1150, solvedCount: 4, lastSubmission: '2026-04-20T18:08:00.000Z' },
-  { rank: 2, user: users[0], score: 980, solvedCount: 3, lastSubmission: '2026-04-20T18:15:00.000Z' },
-  { rank: 3, user: users[1], score: 910, solvedCount: 3, lastSubmission: '2026-04-20T18:20:00.000Z' },
+  { rank: 1,  user: users[2], score: 1150, solvedCount: 4, lastSubmission: '2026-04-22T18:08:00.000Z' },
+  { rank: 2,  user: users[0], score: 980,  solvedCount: 3, lastSubmission: '2026-04-22T18:15:00.000Z' },
+  { rank: 3,  user: users[6], score: 960,  solvedCount: 3, lastSubmission: '2026-04-22T18:17:00.000Z' },
+  { rank: 4,  user: users[3], score: 920,  solvedCount: 3, lastSubmission: '2026-04-22T18:19:00.000Z' },
+  { rank: 5,  user: users[1], score: 910,  solvedCount: 3, lastSubmission: '2026-04-22T18:20:00.000Z' },
+  { rank: 6,  user: users[4], score: 870,  solvedCount: 2, lastSubmission: '2026-04-22T18:24:00.000Z' },
+  { rank: 7,  user: users[5], score: 840,  solvedCount: 2, lastSubmission: '2026-04-22T18:27:00.000Z' },
+  { rank: 8,  user: users[7], score: 790,  solvedCount: 2, lastSubmission: '2026-04-22T18:31:00.000Z' },
+  { rank: 9,  user: users[8], score: 720,  solvedCount: 2, lastSubmission: '2026-04-22T18:35:00.000Z' },
+  { rank: 10, user: users[9], score: 650,  solvedCount: 1, lastSubmission: '2026-04-22T18:40:00.000Z' },
 ]
 
 export const currentUser: User = users[0]

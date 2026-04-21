@@ -13,7 +13,29 @@ async function main() {
     create: { email: "zafar@gmail.com", name: "Zafar Admin", password, role: "creator" },
   });
 
-  console.log("Seeded user:", admin.email);
+  // Leaderboard competitor accounts
+  const competitors = [
+    { email: "stackstorm@arena.dev",  name: "stackstorm"  },
+    { email: "qzmalekuz@arena.dev",   name: "qzmalekuz"   },
+    { email: "heapify@arena.dev",     name: "heapify"     },
+    { email: "byteracer@arena.dev",   name: "byteracer"   },
+    { email: "loopqueen@arena.dev",   name: "loopqueen"   },
+    { email: "nullpointer@arena.dev", name: "nullpointer" },
+    { email: "recursor@arena.dev",    name: "recursor"    },
+    { email: "sigmagrind@arena.dev",  name: "sigmagrind"  },
+    { email: "bitshift@arena.dev",    name: "bitshift"    },
+    { email: "memoize@arena.dev",     name: "memoize"     },
+  ]
+
+  for (const c of competitors) {
+    await prisma.user.upsert({
+      where: { email: c.email },
+      update: {},
+      create: { email: c.email, name: c.name, password, role: "contestee" },
+    })
+  }
+
+  console.log("Seeded", competitors.length + 1, "users");
 
   const contestsData = [
     {
