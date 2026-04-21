@@ -1,4 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap');
+/* Self-hosted fonts via fontsource — no network round-trip, no FOUT */
+@import '@fontsource/anton/400.css';
+@import '@fontsource/oswald/400.css';
+@import '@fontsource/oswald/500.css';
+@import '@fontsource/oswald/600.css';
+@import '@fontsource/oswald/700.css';
+@import '@fontsource/manrope/400.css';
+@import '@fontsource/manrope/500.css';
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+@import '@fontsource/manrope/800.css';
 
 @tailwind base;
 @tailwind components;
@@ -55,14 +65,11 @@ textarea {
 }
 
 .typing-brand-shell {
-  position: relative;
   display: inline-flex;
   align-items: flex-end;
-  /* wide enough to never clip any part of "KODEZILLA.IO" */
-  width: 13ch;
-  overflow: hidden;
   white-space: nowrap;
   line-height: 1;
+  overflow: hidden;
 }
 
 .typing-brand-track {
@@ -73,16 +80,16 @@ textarea {
   animation: brandReveal 2.05s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
 }
 
+/* Caret sits inline right after the text — no movement, just blinks forever */
 .typing-brand-caret {
-  position: absolute;
-  top: 0.08em;
-  bottom: 0.08em;
-  width: 0.08em;
+  display: inline-block;
+  width: 0.07em;
+  height: 0.75em;
+  margin-left: 0.15em;
+  margin-bottom: 0.05em;
+  vertical-align: middle;
   background: var(--accent);
-  transform: translateX(0);
-  animation:
-    brandCaretMove 2.05s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards,
-    caretBlink 0.9s ease-in-out 0.1s 5;
+  animation: caretBlink 0.85s ease-in-out infinite;
 }
 
 @keyframes brandReveal {
@@ -95,25 +102,9 @@ textarea {
   }
 }
 
-@keyframes brandCaretMove {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(12.8ch);
-  }
-}
-
 @keyframes caretBlink {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

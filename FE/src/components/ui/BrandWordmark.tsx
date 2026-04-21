@@ -28,7 +28,11 @@ export function BrandWordmark({ className, animate = false, tone = 'dark' }: Bra
     )
   }
 
+  // Non-animated: show wordmark + persistent blinking caret
   return (
-    <span className={cn('inline-flex items-end whitespace-nowrap leading-none', className)}>{content}</span>
+    <span className={cn('inline-flex items-end whitespace-nowrap leading-none', className)}>
+      {content}
+      <span className="typing-brand-caret" aria-hidden="true" />
+    </span>
   )
 }

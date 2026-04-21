@@ -16,6 +16,9 @@ export function Navbar() {
 
         {/* Centre: nav links */}
         <div className="hidden items-center gap-10 border-x border-neutral-900 px-10 py-2 md:flex">
+          <Link to="/" className="font-mono text-sm uppercase tracking-[0.12em] text-neutral-900 transition hover:text-accent">
+            Home
+          </Link>
           <Link to="/explore" className="font-mono text-sm uppercase tracking-[0.12em] text-neutral-900 transition hover:text-accent">
             Explore
           </Link>
