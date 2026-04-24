@@ -10,8 +10,8 @@ export function LeaderboardTable({ entries, currentUsername }: LeaderboardTableP
   return (
     <div className="overflow-x-auto border border-neutral-900 bg-white shadow-xl shadow-black/5">
       <table className="min-w-[760px] w-full border-collapse">
-        <thead className="bg-neutral-950 text-left text-xs uppercase tracking-[0.18em] text-neutral-400">
-          <tr>
+        <thead className="text-left text-xs uppercase tracking-[0.18em] text-neutral-400">
+          <tr className="bg-neutral-950">
             <th className="px-4 py-4">Rank</th>
             <th className="px-4 py-4">User</th>
             <th className="px-4 py-4">Score</th>
