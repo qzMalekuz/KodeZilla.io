@@ -15,7 +15,7 @@ export function HostContestPage() {
 
   return (
     <PageWrapper>
-      <section className="mx-auto max-w-[960px] space-y-6">
+      <section className="space-y-6">
         <div className="space-y-4 border-b border-neutral-900 pb-8">
           <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Creator Console</p>
           <h1 className="font-mono text-5xl font-semibold uppercase leading-none text-neutral-950 md:text-6xl">Host Contest</h1>

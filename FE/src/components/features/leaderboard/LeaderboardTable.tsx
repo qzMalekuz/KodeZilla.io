@@ -12,11 +12,11 @@ export function LeaderboardTable({ entries, currentUsername }: LeaderboardTableP
       <table className="min-w-[760px] w-full border-collapse">
         <thead className="text-left text-xs uppercase tracking-[0.18em] text-neutral-400">
           <tr className="bg-neutral-950">
-            <th className="px-4 py-4">Rank</th>
-            <th className="px-4 py-4">User</th>
-            <th className="px-4 py-4">Score</th>
-            <th className="px-4 py-4">Solved</th>
-            <th className="px-4 py-4">Last Submission</th>
+            <th className="w-1/5 px-4 py-4 text-center">Rank</th>
+            <th className="w-1/5 px-4 py-4 text-center">User</th>
+            <th className="w-1/5 px-4 py-4 text-center">Score</th>
+            <th className="w-1/5 px-4 py-4 text-center">Solved</th>
+            <th className="w-1/5 px-4 py-4 text-center">Last Submission</th>
           </tr>
         </thead>
         <tbody>
