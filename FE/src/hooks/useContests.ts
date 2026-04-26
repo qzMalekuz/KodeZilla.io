@@ -41,9 +41,9 @@ function mapContest(c: ApiContest) {
     startTime: c.startTime,
     endTime: c.endTime,
     participantCount: 0,
-    problems: [],
+    problems: [] as import('../types').Problem[],
     isPublic: true,
-    tags: [],
+    tags: [] as string[],
     creatorName: c.creatorName,
     problemCount: c.dsaCount + c.mcqCount,
   }
