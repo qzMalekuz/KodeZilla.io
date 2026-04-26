@@ -17,7 +17,13 @@
       "Bash(sed -i '' 's/provideCompletionItems: \\(model, position\\) =>/provideCompletionItems: \\(model: Monaco.editor.ITextModel, position: Monaco.Position\\) =>/g' src/components/features/problem/ProblemEditor.tsx)",
       "Bash(sed -i '' 's/provideHover: \\(model, position\\) =>/provideHover: \\(model: Monaco.editor.ITextModel, position: Monaco.Position\\) =>/g' src/components/features/problem/ProblemEditor.tsx)",
       "Bash(node -e ' *)",
-      "Bash(rtk psql *)"
+      "Bash(rtk psql *)",
+      "Bash(rtk wc *)",
+      "Bash(npm list *)",
+      "Bash(npm install *)"
+    ],
+    "additionalDirectories": [
+      "/private/tmp"
     ]
   }
 }

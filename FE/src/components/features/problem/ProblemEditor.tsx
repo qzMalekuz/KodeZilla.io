@@ -1,6 +1,7 @@
 import { useRef, useState, useCallback } from 'react'
 import Editor, { type OnMount } from '@monaco-editor/react'
 import type * as Monaco from 'monaco-editor'
+import ReactMarkdown from 'react-markdown'
 import { Button } from '../../ui/Button'
 import { ChevronDown } from 'lucide-react'
 import type { Problem } from '../../../types'
@@ -116,6 +117,7 @@ interface ProblemEditorProps {
   code: string
   onCodeChange: (value: string) => void
   onSubmit: (language: string) => void
+  submitting?: boolean
 }
 
 // ── C++ diagnostic checker ────────────────────────────────────────────────────
@@ -880,7 +882,7 @@ const LINTERS: Partial<Record<string, (code: string, monaco: typeof Monaco) => M
   rust:       lintRust,
 }
 
-export function ProblemEditor({ problem, code, onCodeChange, onSubmit }: ProblemEditorProps) {
+export function ProblemEditor({ problem, code, onCodeChange, onSubmit, submitting = false }: ProblemEditorProps) {
   const [selectedLang, setSelectedLang] = useState<Language>(LANGUAGES[0])
   const [langDropdownOpen, setLangDropdownOpen] = useState(false)
   const editorRef = useRef<Monaco.editor.IStandaloneCodeEditor | null>(null)
@@ -1223,78 +1225,11 @@ export function ProblemEditor({ problem, code, onCodeChange, onSubmit }: Problem
           </div>
         )}
 
-        {/* Statement */}
-        <h2 className="mb-3 font-mono text-xl font-semibold uppercase text-neutral-950">Problem Statement</h2>
-        <p className="mb-5 whitespace-pre-line leading-7 text-neutral-700">
-          {problem.statement ?? 'No statement provided.'}
-        </p>
-
-        {/* Input format */}
-        {problem.inputFormat && (
-          <div className="mb-5">
-            <h3 className="mb-1 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Input</h3>
-            <p className="whitespace-pre-line leading-7 text-neutral-600 text-sm">{problem.inputFormat}</p>
-          </div>
-        )}
-
-        {/* Output format */}
-        {problem.outputFormat && (
-          <div className="mb-5">
-            <h3 className="mb-1 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Output</h3>
-            <p className="whitespace-pre-line leading-7 text-neutral-600 text-sm">{problem.outputFormat}</p>
-          </div>
-        )}
-
-        {/* Constraints */}
-        {problem.constraints && problem.constraints.length > 0 && (
-          <div className="mb-5">
-            <h3 className="mb-2 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Constraints</h3>
-            <ul className="space-y-1">
-              {problem.constraints.map((c, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-neutral-600">
-                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
-                  {c}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Examples */}
-        {problem.examples && problem.examples.length > 0 && (
-          <div className="mb-5">
-            <h3 className="mb-3 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Examples</h3>
-            <div className="space-y-4">
-              {problem.examples.map((ex, i) => (
-                <div key={i} className="border border-neutral-900/15">
-                  <div className="grid grid-cols-2 divide-x divide-neutral-900/15">
-                    <div className="p-3">
-                      <p className="mb-1 font-mono text-xs uppercase tracking-wider text-neutral-400">Input</p>
-                      <pre className="whitespace-pre-wrap font-mono text-xs leading-5 text-neutral-800">{ex.input}</pre>
-                    </div>
-                    <div className="p-3">
-                      <p className="mb-1 font-mono text-xs uppercase tracking-wider text-neutral-400">Output</p>
-                      <pre className="whitespace-pre-wrap font-mono text-xs leading-5 text-neutral-800">{ex.output}</pre>
-                    </div>
-                  </div>
-                  {ex.explanation && (
-                    <div className="border-t border-neutral-900/10 bg-neutral-50 px-3 py-2">
-                      <p className="text-xs leading-5 text-neutral-500"><span className="font-semibold text-neutral-700">Note: </span>{ex.explanation}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Note */}
-        {problem.note && (
-          <div className="border-l-2 border-accent pl-4">
-            <h3 className="mb-1 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Note</h3>
-            <p className="text-sm leading-6 text-neutral-600">{problem.note}</p>
-          </div>
-        )}
+        <div className="prose prose-sm max-w-none prose-headings:font-mono prose-headings:uppercase prose-headings:tracking-wide prose-headings:text-neutral-950 prose-p:text-neutral-700 prose-p:leading-7 prose-strong:text-neutral-900 prose-code:rounded prose-code:bg-neutral-100 prose-code:px-1 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:text-neutral-800 prose-pre:rounded-none prose-pre:border prose-pre:border-neutral-200 prose-pre:bg-neutral-50 prose-pre:font-mono prose-pre:text-xs prose-li:text-neutral-700 prose-ul:pl-5">
+          <ReactMarkdown>
+            {problem.statement ?? 'No statement provided.'}
+          </ReactMarkdown>
+        </div>
       </article>
 
       {/* Code editor */}
@@ -1376,8 +1311,8 @@ export function ProblemEditor({ problem, code, onCodeChange, onSubmit }: Problem
           <span className="font-mono text-xs uppercase tracking-[0.12em] text-neutral-600">
             {selectedLang.label}
           </span>
-          <Button variant="solid" onClick={() => onSubmit(selectedLang.id)}>
-            Submit Solution
+          <Button variant="solid" onClick={() => onSubmit(selectedLang.id)} disabled={submitting}>
+            {submitting ? 'Judging…' : 'Submit Solution'}
           </Button>
         </div>
       </article>

@@ -1,6 +1,4 @@
-import { LeaderboardTable } from '../components/features/leaderboard/LeaderboardTable'
 import { PageWrapper } from '../components/layout/PageWrapper'
-import { currentUser, leaderboard } from '../lib/mockData'
 
 export function LeaderboardPage() {
   return (
@@ -11,7 +9,9 @@ export function LeaderboardPage() {
           <h1 className="font-mono text-5xl font-semibold uppercase leading-none text-neutral-950 md:text-6xl">Global Leaderboard</h1>
           <p className="max-w-2xl text-lg text-neutral-600">Rankings across all active public contests.</p>
         </div>
-        <LeaderboardTable entries={leaderboard} currentUsername={currentUser.username} />
+        <div className="flex items-center justify-center py-24 text-neutral-400 font-mono text-sm uppercase tracking-widest">
+          Global leaderboard coming soon
+        </div>
       </section>
     </PageWrapper>
   )
