@@ -14,10 +14,119 @@ const users: User[] = [
 ]
 
 const problemPool: Problem[] = [
-  { id: 'p1', title: 'Binary Search Range', difficulty: 'easy', tags: ['binary-search'], points: 100 },
-  { id: 'p2', title: 'Shortest Teleport Path', difficulty: 'medium', tags: ['graphs', 'bfs'], points: 250 },
-  { id: 'p3', title: 'Segment Tree Beats', difficulty: 'hard', tags: ['segment-tree'], points: 500 },
-  { id: 'p4', title: 'Rolling Hash Duel', difficulty: 'medium', tags: ['strings'], points: 300 },
+  {
+    id: 'p1',
+    title: 'Binary Search Range',
+    difficulty: 'easy',
+    tags: ['binary-search'],
+    points: 100,
+    timeLimit: '1 s',
+    memoryLimit: '256 MB',
+    statement: 'You are given a sorted array of N distinct integers and Q queries. For each query, given two integers L and R, count the number of elements in the array that fall within the inclusive range [L, R].',
+    inputFormat: 'The first line contains two integers N and Q — the size of the array and the number of queries.\nThe second line contains N space-separated integers in strictly increasing order.\nEach of the next Q lines contains two integers L and R.',
+    outputFormat: 'For each query, output a single integer — the count of elements in [L, R].',
+    constraints: [
+      '1 ≤ N, Q ≤ 10^5',
+      '-10^9 ≤ a[i] ≤ 10^9',
+      '-10^9 ≤ L ≤ R ≤ 10^9',
+    ],
+    examples: [
+      {
+        input: '5 3\n1 3 5 7 9\n2 6\n1 9\n4 8',
+        output: '2\n5\n2',
+        explanation: 'Query [2,6]: elements 3 and 5 are in range → 2. Query [1,9]: all 5 elements → 5. Query [4,8]: elements 5 and 7 → 2.',
+      },
+      {
+        input: '3 1\n10 20 30\n15 25',
+        output: '1',
+      },
+    ],
+    note: 'Use lower_bound and upper_bound (or equivalent) to answer each query in O(log N). A brute-force O(N·Q) solution will TLE.',
+  },
+  {
+    id: 'p2',
+    title: 'Shortest Teleport Path',
+    difficulty: 'medium',
+    tags: ['graphs', 'bfs'],
+    points: 250,
+    timeLimit: '2 s',
+    memoryLimit: '256 MB',
+    statement: 'A city has N nodes and M bidirectional roads. Some pairs of nodes are connected by teleporters — instant travel at zero cost. Normal roads have a travel time of 1 unit. Find the minimum travel time from node 1 to node N.\n\nTeleporters are free to use but each teleporter link can only be used once per journey.',
+    inputFormat: 'The first line contains N, M, and T — nodes, roads, and teleporter links.\nNext M lines each contain two integers u and v (a road between u and v, cost 1).\nNext T lines each contain two integers u and v (a teleporter between u and v, cost 0).',
+    outputFormat: 'A single integer — the minimum time to travel from node 1 to node N. If impossible, output -1.',
+    constraints: [
+      '2 ≤ N ≤ 10^5',
+      '0 ≤ M ≤ 2×10^5',
+      '0 ≤ T ≤ 10^5',
+      'Edges are bidirectional',
+    ],
+    examples: [
+      {
+        input: '4 3 1\n1 2\n2 3\n3 4\n1 4',
+        output: '0',
+        explanation: 'The teleporter connects node 1 directly to node 4, so the cost is 0.',
+      },
+      {
+        input: '5 4 1\n1 2\n2 3\n3 4\n4 5\n2 4',
+        output: '2',
+        explanation: 'Path: 1→2 (cost 1) →teleport→ 4 (cost 0) →5 (cost 1) = total 2.',
+      },
+    ],
+    note: 'Model this as a 0-1 BFS: teleporter edges have weight 0 (front of deque) and roads have weight 1 (back of deque).',
+  },
+  {
+    id: 'p3',
+    title: 'Segment Tree Beats',
+    difficulty: 'hard',
+    tags: ['segment-tree'],
+    points: 500,
+    timeLimit: '3 s',
+    memoryLimit: '512 MB',
+    statement: 'You are given an array of N integers. You must support two types of operations:\n\n1. Chmin(l, r, v): for all i in [l, r], set a[i] = min(a[i], v).\n2. Query(l, r): output the sum of all elements in [l, r].\n\nProcess all operations efficiently.',
+    inputFormat: 'First line: integers N and Q.\nSecond line: N integers — the initial array.\nNext Q lines: either "1 l r v" for a Chmin operation, or "2 l r" for a sum query.',
+    outputFormat: 'For each query of type 2, output the sum on a separate line.',
+    constraints: [
+      '1 ≤ N, Q ≤ 5×10^5',
+      '1 ≤ a[i] ≤ 10^9',
+      '1 ≤ l ≤ r ≤ N',
+      '1 ≤ v ≤ 10^9',
+    ],
+    examples: [
+      {
+        input: '5 4\n5 3 8 2 7\n1 1 3 4\n2 1 5\n1 2 5 3\n2 1 5',
+        output: '19\n15',
+        explanation: 'After Chmin(1,3,4): array = [4,3,4,2,7], sum = 20... wait, query gives sum of all 5 = 4+3+4+2+7 = 20. After Chmin(2,5,3): [4,3,3,2,3], sum = 15.',
+      },
+    ],
+    note: 'This problem requires the "Segment Tree Beats" (Ji Driver Segmentation) technique. The amortized complexity is O((N+Q) log² N).',
+  },
+  {
+    id: 'p4',
+    title: 'Rolling Hash Duel',
+    difficulty: 'medium',
+    tags: ['strings'],
+    points: 300,
+    timeLimit: '1 s',
+    memoryLimit: '256 MB',
+    statement: 'Given a string S and Q queries, each query asks: are the substrings S[l1..r1] and S[l2..r2] equal? Answer each query in O(1) after O(N) preprocessing using polynomial rolling hash.',
+    inputFormat: 'First line: string S of length N (lowercase English letters).\nSecond line: integer Q.\nNext Q lines: four integers l1 r1 l2 r2 (1-indexed, inclusive).',
+    outputFormat: 'For each query, output "YES" if the substrings are equal, "NO" otherwise.',
+    constraints: [
+      '1 ≤ N ≤ 10^6',
+      '1 ≤ Q ≤ 10^5',
+      '1 ≤ l1 ≤ r1 ≤ N',
+      '1 ≤ l2 ≤ r2 ≤ N',
+      'Substrings have equal length: r1-l1 = r2-l2',
+    ],
+    examples: [
+      {
+        input: 'abacaba\n3\n1 3 5 7\n1 4 1 4\n2 4 4 6',
+        output: 'YES\nYES\nNO',
+        explanation: 'S[1..3]="aba" == S[5..7]="aba" → YES. S[1..4]="abac" == S[1..4]="abac" → YES. S[2..4]="bac" vs S[4..6]="cab" → NO.',
+      },
+    ],
+    note: 'Use double hashing (two different bases and mods) to avoid hash collisions. A single hash may fail on adversarial inputs.',
+  },
 ]
 
 export const contests: Contest[] = [

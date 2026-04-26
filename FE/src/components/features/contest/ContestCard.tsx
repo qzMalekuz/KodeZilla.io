@@ -28,7 +28,7 @@ export function ContestCard({ contest }: ContestCardProps) {
   return (
     <Link
       to={`/contest/${contest.id}`}
-      className="editorial-card group relative flex flex-col overflow-hidden bg-white transition-all duration-300 hover:shadow-xl hover:shadow-black/10"
+      className="editorial-card group relative flex flex-col overflow-hidden border border-neutral-900 bg-white transition-all duration-300 hover:border-black hover:shadow-xl hover:shadow-black/20"
     >
       {/* Live accent bar */}
       {status === 'live' && (

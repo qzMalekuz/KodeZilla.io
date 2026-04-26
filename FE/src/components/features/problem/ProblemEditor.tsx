@@ -3,6 +3,7 @@ import Editor, { type OnMount } from '@monaco-editor/react'
 import type * as Monaco from 'monaco-editor'
 import { Button } from '../../ui/Button'
 import { ChevronDown } from 'lucide-react'
+import type { Problem } from '../../../types'
 
 interface Language {
   id: string
@@ -111,7 +112,7 @@ fn main() {
 ]
 
 interface ProblemEditorProps {
-  statement: string
+  problem: Problem
   code: string
   onCodeChange: (value: string) => void
   onSubmit: (language: string) => void
@@ -879,7 +880,7 @@ const LINTERS: Partial<Record<string, (code: string, monaco: typeof Monaco) => M
   rust:       lintRust,
 }
 
-export function ProblemEditor({ statement, code, onCodeChange, onSubmit }: ProblemEditorProps) {
+export function ProblemEditor({ problem, code, onCodeChange, onSubmit }: ProblemEditorProps) {
   const [selectedLang, setSelectedLang] = useState<Language>(LANGUAGES[0])
   const [langDropdownOpen, setLangDropdownOpen] = useState(false)
   const editorRef = useRef<Monaco.editor.IStandaloneCodeEditor | null>(null)
@@ -1211,15 +1212,93 @@ export function ProblemEditor({ statement, code, onCodeChange, onSubmit }: Probl
   }
 
   return (
-    <section className="grid gap-4 lg:grid-cols-2">
+    <section className="grid gap-3 lg:grid-cols-2" style={{ height: 'calc(100vh - 152px)' }}>
       {/* Problem statement */}
-      <article className="border border-neutral-900 bg-white p-6">
-        <h2 className="mb-3 font-mono text-2xl font-semibold uppercase text-neutral-950">Problem Statement</h2>
-        <p className="leading-8 text-neutral-700">{statement}</p>
+      <article className="overflow-y-auto border border-neutral-900 bg-white p-6">
+        {/* Limits */}
+        {(problem.timeLimit || problem.memoryLimit) && (
+          <div className="mb-5 flex gap-6 font-mono text-xs text-neutral-500">
+            {problem.timeLimit && <span>time limit: {problem.timeLimit}</span>}
+            {problem.memoryLimit && <span>memory limit: {problem.memoryLimit}</span>}
+          </div>
+        )}
+
+        {/* Statement */}
+        <h2 className="mb-3 font-mono text-xl font-semibold uppercase text-neutral-950">Problem Statement</h2>
+        <p className="mb-5 whitespace-pre-line leading-7 text-neutral-700">
+          {problem.statement ?? 'No statement provided.'}
+        </p>
+
+        {/* Input format */}
+        {problem.inputFormat && (
+          <div className="mb-5">
+            <h3 className="mb-1 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Input</h3>
+            <p className="whitespace-pre-line leading-7 text-neutral-600 text-sm">{problem.inputFormat}</p>
+          </div>
+        )}
+
+        {/* Output format */}
+        {problem.outputFormat && (
+          <div className="mb-5">
+            <h3 className="mb-1 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Output</h3>
+            <p className="whitespace-pre-line leading-7 text-neutral-600 text-sm">{problem.outputFormat}</p>
+          </div>
+        )}
+
+        {/* Constraints */}
+        {problem.constraints && problem.constraints.length > 0 && (
+          <div className="mb-5">
+            <h3 className="mb-2 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Constraints</h3>
+            <ul className="space-y-1">
+              {problem.constraints.map((c, i) => (
+                <li key={i} className="flex items-start gap-2 text-sm text-neutral-600">
+                  <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
+                  {c}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Examples */}
+        {problem.examples && problem.examples.length > 0 && (
+          <div className="mb-5">
+            <h3 className="mb-3 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Examples</h3>
+            <div className="space-y-4">
+              {problem.examples.map((ex, i) => (
+                <div key={i} className="border border-neutral-900/15">
+                  <div className="grid grid-cols-2 divide-x divide-neutral-900/15">
+                    <div className="p-3">
+                      <p className="mb-1 font-mono text-xs uppercase tracking-wider text-neutral-400">Input</p>
+                      <pre className="whitespace-pre-wrap font-mono text-xs leading-5 text-neutral-800">{ex.input}</pre>
+                    </div>
+                    <div className="p-3">
+                      <p className="mb-1 font-mono text-xs uppercase tracking-wider text-neutral-400">Output</p>
+                      <pre className="whitespace-pre-wrap font-mono text-xs leading-5 text-neutral-800">{ex.output}</pre>
+                    </div>
+                  </div>
+                  {ex.explanation && (
+                    <div className="border-t border-neutral-900/10 bg-neutral-50 px-3 py-2">
+                      <p className="text-xs leading-5 text-neutral-500"><span className="font-semibold text-neutral-700">Note: </span>{ex.explanation}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Note */}
+        {problem.note && (
+          <div className="border-l-2 border-accent pl-4">
+            <h3 className="mb-1 font-mono text-sm font-semibold uppercase tracking-wide text-neutral-950">Note</h3>
+            <p className="text-sm leading-6 text-neutral-600">{problem.note}</p>
+          </div>
+        )}
       </article>
 
       {/* Code editor */}
-      <article className="flex flex-col border border-neutral-900 bg-neutral-950">
+      <article className="flex min-h-0 flex-col border border-neutral-900 bg-neutral-950">
         {/* Editor toolbar */}
         <div className="flex items-center justify-between border-b border-white/10 px-4 py-2">
           <h2 className="font-mono text-xs uppercase tracking-[0.16em] text-neutral-400">Code Editor</h2>
@@ -1256,7 +1335,7 @@ export function ProblemEditor({ statement, code, onCodeChange, onSubmit }: Probl
         </div>
 
         {/* Monaco editor */}
-        <div className="flex-1 min-h-[400px]">
+        <div className="min-h-0 flex-1">
           <Editor
             height="100%"
             language={selectedLang.monaco}

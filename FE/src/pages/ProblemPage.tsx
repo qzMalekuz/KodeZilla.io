@@ -6,20 +6,10 @@ import { Button } from '../components/ui/Button'
 import { Modal } from '../components/ui/Modal'
 import { useContests } from '../hooks/useContests'
 
-const template = `#include <bits/stdc++.h>
-using namespace std;
-
-int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(nullptr);
-
-  return 0;
-}`
-
 export function ProblemPage() {
   const { id, pid } = useParams()
   const { data = [] } = useContests()
-  const [code, setCode] = useState(template)
+  const [code, setCode] = useState('')
   const [showSubmitModal, setShowSubmitModal] = useState(false)
 
   const problem = useMemo(() => {
@@ -37,17 +27,19 @@ export function ProblemPage() {
 
   return (
     <PageWrapper>
-      <div className="mb-6 space-y-3 border-b border-neutral-900 pb-6">
-        <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Problem View</p>
-        <h1 className="font-mono text-4xl font-semibold uppercase text-neutral-950 md:text-5xl">{problem.title}</h1>
-        <p className="text-neutral-500">Difficulty: {problem.difficulty.toUpperCase()}</p>
+      <div className="-mt-8 md:-mt-10">
+        <div className="relative mb-4 flex items-center border-y border-neutral-900 py-4">
+          <p className="font-mono text-sm uppercase tracking-[0.18em] text-accent">Problem View</p>
+          <h1 className="absolute left-1/2 -translate-x-1/2 font-mono text-2xl font-semibold uppercase text-neutral-950">{problem.title}</h1>
+          <p className="ml-auto font-mono text-sm uppercase tracking-[0.18em] text-neutral-500">Difficulty: {problem.difficulty}</p>
+        </div>
+        <ProblemEditor
+          problem={problem}
+          code={code}
+          onCodeChange={setCode}
+          onSubmit={() => setShowSubmitModal(true)}
+        />
       </div>
-      <ProblemEditor
-        statement="Given an array and target sum, compute the maximum valid score under the round constraints."
-        code={code}
-        onCodeChange={setCode}
-        onSubmit={() => setShowSubmitModal(true)}
-      />
       <Modal open={showSubmitModal} onClose={() => setShowSubmitModal(false)} title="Submission Queued">
         <div className="space-y-5">
           <p className="leading-7 text-neutral-700">

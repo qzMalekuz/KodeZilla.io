@@ -80,7 +80,6 @@ textarea {
   animation: brandReveal 2.05s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
 }
 
-/* Caret sits inline right after the text — no movement, just blinks forever */
 .typing-brand-caret {
   display: inline-block;
   width: 0.07em;
@@ -89,7 +88,11 @@ textarea {
   margin-bottom: 0.05em;
   vertical-align: middle;
   background: var(--accent);
-  animation: caretBlink 0.85s ease-in-out infinite;
+}
+
+/* Blinks during the reveal, then fades out and disappears */
+.typing-brand-caret--animated {
+  animation: caretBlink 0.85s ease-in-out 5, caretFadeOut 0.4s ease-in 2.15s forwards;
 }
 
 @keyframes brandReveal {
@@ -105,6 +108,11 @@ textarea {
 @keyframes caretBlink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0; }
+}
+
+@keyframes caretFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; width: 0; margin-left: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

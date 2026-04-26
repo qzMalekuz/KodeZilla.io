@@ -10,12 +10,26 @@ export interface Contest {
   tags?: string[]
 }
 
+export interface ProblemExample {
+  input: string
+  output: string
+  explanation?: string
+}
+
 export interface Problem {
   id: string
   title: string
   difficulty: 'easy' | 'medium' | 'hard'
   tags: string[]
   points: number
+  timeLimit?: string
+  memoryLimit?: string
+  statement?: string
+  inputFormat?: string
+  outputFormat?: string
+  constraints?: string[]
+  examples?: ProblemExample[]
+  note?: string
 }
 
 export interface User {
