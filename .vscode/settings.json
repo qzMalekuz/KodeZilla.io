@@ -1,4 +1,5 @@
 {
   "typescript.tsdk": "FE/node_modules/typescript/lib",
-  "typescript.preferences.importModuleSpecifier": "relative"
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": false
 }
